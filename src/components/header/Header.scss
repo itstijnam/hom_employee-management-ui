@@ -1,0 +1,13 @@
+
+$background-dark-color: black;
+$text-color-white: white;
+
+.header-page{
+    background-color: $background-dark-color;
+    color: $text-color-white;
+    min-height: 5rem;
+    display: flex;
+    align-items: center;
+    padding: 0rem 5rem;
+    font-size: 1.5rem;
+}

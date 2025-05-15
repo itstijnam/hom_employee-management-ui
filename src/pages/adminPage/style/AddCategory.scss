@@ -1,0 +1,110 @@
+.add-category-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.add-button {
+    background-color: #1e824c;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #166c3b;
+}
+
+.category-table {
+    min-width: 20rem;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 16px;
+}
+
+.category-table th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 2px solid #ddd;
+}
+
+.category-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.addDialogue {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 2rem;
+    z-index: 1000;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.add_input {
+    margin-bottom: 1rem;
+
+    input {
+        width: 100%;
+        padding: 0.7rem;
+        margin-top: 1rem;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: black;
+        // box-shadow: 0 0 0 3px rgba(30, 130, 76, 0.2);
+    }
+}
+
+.add {
+    background-color: #1e824c;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: inline-block;
+}
+
+.add:hover {
+    background-color: #166c3b;
+}

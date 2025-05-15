@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  top: 0;
+  padding: 0;
+  /* scrollbar-width: none; */
+}
+
+body {
+  overflow: auto;
+}
+
+.backArrow {
+  cursor: pointer;
+  color: black;
+  display: inline-block;
+}

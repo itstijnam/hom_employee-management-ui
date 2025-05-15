@@ -1,0 +1,53 @@
+.admin-layout-page-the-very-first-box {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; // fill entire screen
+  width: 100%;
+
+  // --- Header stays on top ---
+  > .header {
+    flex-shrink: 0;
+  }
+
+  .admin-main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden; // prevent children from escaping
+    height: 100%;
+
+    .admin-side-bar {
+      width: 250px;
+      background-color: #f9f9f9;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .admin-side-bar-content-display {
+      flex: 1;
+      overflow-y: auto; // ✅ allow only this to scroll
+      padding: 1rem;
+      background-color: #fff;
+    }
+  }
+}
+
+// ----- Mobile View -----
+@media screen and (max-width: 768px) {
+  .admin-main-layout {
+    flex-direction: column-reverse;
+
+    .admin-side-bar {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+
+    .admin-side-bar-content-display {
+    //   height: calc(100vh - 60px - 60px); // header + mobile sidebar height
+      overflow-y: auto;
+      padding: 0.5rem;
+    }
+  }
+}
