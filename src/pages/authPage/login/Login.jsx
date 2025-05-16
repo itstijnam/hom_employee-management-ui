@@ -137,7 +137,7 @@ function Login() {
                         </button>
 
                         <div className="signup-link">
-                            House of MarkTech
+                            House of MarkTech.
                         </div>
                     </form>
                 </div>
