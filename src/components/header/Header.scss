@@ -1,8 +1,7 @@
-
 $background-dark-color: black;
 $text-color-white: white;
 
-.header-page{
+.header-page {
     background-color: $background-dark-color;
     color: $text-color-white;
     min-height: 5rem;
@@ -10,12 +9,13 @@ $text-color-white: white;
     align-items: center;
     padding: 0rem 5rem;
     font-size: 1.5rem;
-    background-color: white;
+    // background-color: white;
     box-shadow: 2px 2px 8px black;
     margin-bottom: 0.3rem;
+    background: linear-gradient(135deg, black, white, white, black );
 }
 
-.header-hom-logo{
+.header-hom-logo {
     text-shadow: 1px 3px 8px red;
     font-weight: 900;
 }

@@ -6,7 +6,7 @@
 
 
   // --- Header stays on top ---
-  > .header {
+  >.header {
     flex-shrink: 0;
   }
 
@@ -29,6 +29,8 @@
       padding: 1rem;
       background-color: #fff;
       background: #5d3fd3;
+      background: linear-gradient(to bottom, #1a1a2e, #16213e);
+
     }
   }
 }
@@ -47,7 +49,7 @@
     }
 
     .admin-side-bar-content-display {
-    //   height: calc(100vh - 60px - 60px); // header + mobile sidebar height
+      //   height: calc(100vh - 60px - 60px); // header + mobile sidebar height
       overflow-y: auto;
       padding: 0.5rem;
     }

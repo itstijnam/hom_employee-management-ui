@@ -5,31 +5,46 @@ import AdminDashBoard from './pages/adminPage/components/AdminDashBoard'
 import ManageEmployees from './pages/adminPage/components/ManageEmployees'
 import AddEmployee from './pages/adminPage/components/AddEmployee'
 import AddCategory from './pages/adminPage/components/AddCategory'
+import ProfilePage from './pages/adminPage/components/ProfilePage'
+import Login from './pages/authPage/login/Login'
+import ProtectedRoute from './protectedRoute/ProtectedRoute'
 
 
 function App() {
   const browserRouter = createBrowserRouter([
     {
       path: '/',
-      element: <AdminLayout/>,
+      element: (
+        <ProtectedRoute>
+          <AdminLayout />
+        </ProtectedRoute>
+      ),
       children: [
         {
           path: '',
-          element: <AdminDashBoard/>
+          element: <AdminDashBoard />
         },
         {
           path: 'manage-employee',
-          element: <ManageEmployees/>
+          element: <ManageEmployees />
         },
         {
           path: 'add-employee',
-          element: <AddEmployee/>
+          element: <AddEmployee />
         },
         {
           path: 'add_category',
-          element: <AddCategory/>
+          element: <AddCategory />
+        },
+        {
+          path: 'profile',
+          element: <ProfilePage />
         }
       ]
+    },
+    {
+      path: '/login',
+      element: <Login />
     }
   ])
   return (

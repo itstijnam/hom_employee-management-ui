@@ -1,0 +1,181 @@
+$edit-gradient: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+$darker-color: #0a0a0a;
+
+@mixin centerItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+    color: white;
+    font-family: sans-serif;
+
+    // width: 100%;
+    // max-width: 1200px;
+    // margin: 0 auto;
+    // padding: 1rem;
+    // box-sizing: border-box;
+}
+
+.current_user_profile {
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    min-height: 8rem;
+    border-radius: 1rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px white;
+    color: black;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .current-user-detail {
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
+        align-items: center;
+        flex: 1;
+        min-width: 200px;
+
+        .current_user_image {
+            @include centerItem;
+            border: 1px solid white;
+            height: 6rem;
+            width: 6rem;
+            min-height: 6rem;
+            min-width: 6rem;
+            padding: 0.2rem;
+            border-radius: 50%;
+            background: #4facfe49;
+            box-shadow: 0px 0px 8px rgb(79, 172, 254);
+            overflow: hidden;
+
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .current_user_basic_info {
+            h2 {
+                font-size: clamp(1.2rem, 4vw, 2rem);
+                margin: 0;
+                line-height: 1.2;
+            }
+
+            p {
+                background-color: red;
+                display: inline-block;
+                padding: 0.2rem 0.6rem;
+                border-radius: 10px;
+                color: white;
+                font-size: clamp(0.8rem, 2vw, 1rem);
+                margin: 0.5rem 0 0 0;
+            }
+        }
+    }
+
+    .current-user-action_btn {
+        @include centerItem;
+        cursor: pointer;
+        border-radius: 10px;
+        width: clamp(4rem, 15vw, 6rem);
+        height: clamp(4rem, 15vw, 6rem);
+        font-size: clamp(1rem, 4vw, 1.8rem);
+        background: $edit-gradient;
+        color: white;
+        box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(79, 172, 254, 0.5);
+        }
+    }
+}
+
+.current_user_official_details {
+    border: 1px solid white;
+    margin-top: 2rem;
+    padding: 1rem;
+    min-height: 10rem;
+    border-radius: 1rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 10px white;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+
+    .current_user_join_data,
+    .current_user_ids {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        p {
+            margin: 0;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-weight: 600;
+
+            span {
+                font-weight: 400;
+                text-align: right;
+            }
+        }
+    }
+
+    .current_user_head {
+        h2 {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin: 1rem 0 0 0;
+
+            span {
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+/* Medium screens and up */
+@media (min-width: 768px) {
+    .current_user_profile {
+        padding: 1rem 1.5rem;
+        flex-wrap: nowrap;
+
+        .current-user-detail {
+            .current_user_image {
+                height: 8rem;
+                width: 8rem;
+            }
+        }
+    }
+
+    .current_user_official_details {
+        padding: 1rem 1.5rem;
+
+        .current_user_join_data,
+        .current_user_ids {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    }
+}
+
+/* Large screens */
+@media (min-width: 1024px) {
+    .profile {
+        padding: 2rem;
+    }
+}

@@ -2,11 +2,13 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2.5rem;
-  background: white;
+  // background: white;
   border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0px 30px rgba(255, 109, 109, 0.947) inset;
+  // box-shadow: 0 0px 30px rgba(187, 173, 94, 0.947);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
+  backdrop-filter: blur(12px);
 
   .back-arrow {
     display: flex;
@@ -30,6 +32,7 @@
 
     h2 {
       color: #2c3e50;
+      color: white;
       font-size: 1.8rem;
       margin-bottom: 0.5rem;
       font-weight: 700;

@@ -1,10 +1,13 @@
 import React from 'react'
 import '../style/AdminSideBar.scss'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { setCurrentUser } from '../../../redux/authSlice';
 
 function AdminSideBar() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const adminSidebarNavList = [
     { icon: '⚖', text: 'Dashboard', url: '/' },
@@ -21,6 +24,11 @@ const sideBarNavHandler = (text)=>{
         navigate('/manage-employee');
     } else if(text === 'Category'){
         navigate('/add_category')
+    } else if (text === 'Profile'){
+        navigate('/profile')
+    } else if(text === 'Logout'){
+        dispatch(setCurrentUser(null))
+        navigate('/')
     }
 }
 

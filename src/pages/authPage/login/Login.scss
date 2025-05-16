@@ -1,0 +1,217 @@
+// Variables
+$primary-color: #8543ee;
+$primary-hover: #3a56d4;
+$text-color: #2b2d42;
+$light-gray: #f8f9fa;
+$medium-gray: #e9ecef;
+$dark-gray: #adb5bd;
+$white: #ffffff;
+$black: #000000;
+$border-radius: 8px;
+$box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+// $primary-color: #4361ee;
+// $primary-hover: #3a56d4;
+// $text-color: #2b2d42;
+// $light-gray: #f8f9fa;
+// $medium-gray: #e9ecef;
+// $dark-gray: #adb5bd;
+// $white: #ffffff;
+// $black: #000000;
+// $border-radius: 8px;
+// $box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s, $timing: ease) {
+    transition: $property $duration $timing;
+}
+
+// Base styles
+.login-container {
+    min-height: 100vh;
+    background-color: $light-gray;
+    @include flex-center;
+    padding: 2rem;
+    background-image: linear-gradient(135deg, rgba($primary-color, 0.1) 0%, rgba($primary-color, 0.05) 100%);
+
+}
+
+.card {
+    background: $white;
+
+    border-radius: $border-radius;
+    box-shadow: $box-shadow;
+    width: 100%;
+    max-width: 450px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        max-width: 800px;
+    }
+}
+
+.company-info {
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+    padding: 2rem;
+    @include flex-center;
+    flex-direction: column;
+    color: $white;
+    min-height: 200px;
+
+    img {
+        max-width: 150px;
+        height: auto;
+        margin-bottom: 1rem;
+        @include transition;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    @media (min-width: 768px) {
+        flex: 1;
+        min-height: auto;
+    }
+}
+
+.cardform {
+    padding: 2rem;
+    flex: 1;
+
+    .form-title {
+        color: $text-color;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+}
+
+.login-input {
+    margin-bottom: 1.5rem;
+
+    p {
+        color: $text-color;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid $medium-gray;
+        border-radius: $border-radius;
+        font-size: 1rem;
+        @include transition;
+
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+        }
+
+        &::placeholder {
+            color: $dark-gray;
+            opacity: 1;
+        }
+    }
+}
+
+.form-options {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+
+    .forgot-password {
+        cursor: pointer;
+        color: $primary-color;
+        text-decoration: none;
+        font-size: 0.9rem;
+        display: flex;
+        gap: 0.5rem;
+        @include transition;
+
+        &:hover {
+            text-decoration: underline;
+            color: $primary-hover;
+        }
+
+        span {
+            color: red;
+        }
+    }
+}
+
+.login-button {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(to bottom, #1a1a2e, #16213e);
+    color: $white;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    @include transition;
+
+    &:hover {
+        background-color: $primary-hover;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba($primary-color, 0.2);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: $dark-gray;
+    font-size: 0.9rem;
+
+    a {
+        color: $primary-color;
+        text-decoration: none;
+        font-weight: 500;
+        @include transition;
+
+        &:hover {
+            text-decoration: underline;
+            color: $primary-hover;
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 767px) {
+    .login-container {
+        padding: 1rem;
+    }
+
+    .company-info {
+        border-radius: $border-radius $border-radius 0 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardform {
+        padding: 1.5rem;
+    }
+
+    .form-title {
+        font-size: 1.3rem;
+    }
+}

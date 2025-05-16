@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import employeeSlice from './employeeSlice.js'
+import authSlice from './authSlice.js'
 
 import {
     persistReducer,
@@ -20,6 +21,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     //---------slices----------
+    auth: authSlice,
     employee: employeeSlice
 
 })
