@@ -41,11 +41,6 @@ const sideBarNavHandler = (text)=>{
                 ))}
             </div>
         </div>
-        {/* <div className="admin-side-logout">
-            <div className="nav-item">
-                <p className='nav-icon'>⏻ <span>Logout</span> </p>
-            </div>
-        </div> */}
     </div>
   )
 }

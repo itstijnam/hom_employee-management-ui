@@ -4,7 +4,7 @@ $text-color-white: white;
 .header-page {
     background-color: $background-dark-color;
     color: $text-color-white;
-    min-height: 5rem;
+    height: 5rem;
     display: flex;
     align-items: center;
     padding: 0rem 5rem;
@@ -18,4 +18,14 @@ $text-color-white: white;
 .header-hom-logo {
     text-shadow: 1px 3px 8px red;
     font-weight: 900;
+}
+
+@media screen and (max-width: 480px) {
+    .header-page{
+        // border: 1px solid red;
+        height: 3.5rem !important;
+        font-size: 1.2rem;
+        padding: 0rem 1rem;
+        background: gray;
+    }
 }

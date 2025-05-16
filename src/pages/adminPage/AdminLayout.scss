@@ -13,19 +13,19 @@
   .admin-main-layout {
     display: flex;
     flex: 1;
-    overflow: hidden; // prevent children from escaping
+    overflow: hidden;
     height: 100%;
 
     .admin-side-bar {
-      width: 250px;
+      // width: 3%;
       background-color: #f9f9f9;
-      overflow-y: auto;
+      overflow-y: hidden;
       flex-shrink: 0;
     }
 
     .admin-side-bar-content-display {
       flex: 1;
-      overflow-y: auto; // ✅ allow only this to scroll
+      overflow-y: auto;
       padding: 1rem;
       background-color: #fff;
       background: #5d3fd3;
@@ -42,10 +42,17 @@
 
     .admin-side-bar {
       width: 100%;
-      height: 60px;
+      height: 50px;
       display: flex;
-      overflow-x: auto;
-      overflow-y: hidden;
+      ;
+      align-items: center;
+      gap: 2rem;
+      overflow: hidden;
+      // background-color: #050d23 !important;
+      background: gray !important;
+
+      color: white !important;
+      border-top: 1px solid #ddd !important;
     }
 
     .admin-side-bar-content-display {
