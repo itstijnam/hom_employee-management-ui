@@ -4,6 +4,7 @@
   height: 100vh; // fill entire screen
   width: 100%;
 
+
   // --- Header stays on top ---
   > .header {
     flex-shrink: 0;
@@ -27,6 +28,7 @@
       overflow-y: auto; // ✅ allow only this to scroll
       padding: 1rem;
       background-color: #fff;
+      background: #5d3fd3;
     }
   }
 }

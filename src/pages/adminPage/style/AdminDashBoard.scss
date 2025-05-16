@@ -1,8 +1,8 @@
 .admin_dashboard {
   min-height: 100vh;
 //   background-color: #111;
+color: black;
   color: #eee;
-  color: black;
   padding: 2rem;
   box-sizing: border-box;
 }
@@ -12,7 +12,7 @@
   font-size: 2rem;
   font-weight: 700;
   margin-bottom: 2rem;
-  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  background: linear-gradient(90deg, #ede9ed, #e3e3fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -108,6 +108,7 @@
   }
 
   .adminlists {
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -121,7 +122,8 @@
 
     &:hover {
       background-color: rgba(255, 255, 255, 0.1);
-        color: black;
+    //   background-color: transparent;
+        // color: black;
     }
 
     .admins-actions-btns {

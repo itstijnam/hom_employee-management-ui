@@ -9,193 +9,185 @@ import {
   setEmployee,
   setSelectedEmployee,
 } from '../../../redux/employeeSlice';
+import { FiArrowLeft, FiUpload, FiUser, FiMail, FiLock, FiDollarSign, FiMapPin, FiBriefcase } from 'react-icons/fi';
 
 function AddEmployee() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { selectedEmployee, employee, categories } = useSelector(store => store.employee);
 
-  // Initialize form with selectedEmployee data if available, else empty defaults
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    salary: 0,
+    salary: '',
     address: '',
     category: '',
     post: '',
     image: null,
+    preview: null,
   });
 
-  // On mount or when selectedEmployee changes, update form data for editing
   useEffect(() => {
     if (selectedEmployee) {
       setFormData({
-        name: selectedEmployee.name || '',
-        email: selectedEmployee.email || '',
-        password: selectedEmployee.password || '',
-        salary: selectedEmployee.salary || 0,
-        address: selectedEmployee.address || '',
-        category: selectedEmployee.category || '',
-        post: selectedEmployee.post || '',
-        image: selectedEmployee.image || null,
+        ...selectedEmployee,
+        salary: selectedEmployee.salary.toString(),
+        preview: selectedEmployee.image || null,
       });
     }
   }, [selectedEmployee]);
 
   const postList = ['Admin', 'Employee'];
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, files } = e.target;
-    if (name === 'salary') {
-      setFormData({ ...formData, salary: Number(value) });
-    } else if (name === 'image') {
-      setFormData({ ...formData, image: files[0] });
+    if (name === 'image' && files.length) {
+      setFormData({
+        ...formData,
+        image: files[0],
+        preview: URL.createObjectURL(files[0]),
+      });
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
-
-    // Check if editing existing employee (by email)
     const isEdit = selectedEmployee && selectedEmployee.email === formData.email;
 
-    // If editing, replace the employee, else add new
-    let updatedEmployees;
+    // Build new list
+    const updated = isEdit
+      ? employee.map(emp => emp.email === formData.email ? formData : emp)
+      : [formData, ...employee];
+
+    dispatch(setEmployee(updated));
+
+    // Salary adjustment
     if (isEdit) {
-      updatedEmployees = employee.map(emp =>
-        emp.email === formData.email ? formData : emp
-      );
+      const diff = parseFloat(formData.salary) - (selectedEmployee.salary || 0);
+      if (diff) dispatch(incrementSalaryCount(diff));
     } else {
-      updatedEmployees = [formData, ...employee];
+      dispatch(incrementSalaryCount(parseFloat(formData.salary)));
     }
 
-    // Dispatch updated employees
-    dispatch(setEmployee(updatedEmployees));
-
-    // Salary update: if edit, adjust by difference; if new, add full salary
-    if (isEdit) {
-      const salaryDiff = formData.salary - (selectedEmployee.salary || 0);
-      if (salaryDiff !== 0) dispatch(incrementSalaryCount(salaryDiff));
-    } else {
-      dispatch(incrementSalaryCount(formData.salary));
-    }
-
-    // Update counts only on new add
     if (!isEdit) {
-      if (formData.post === 'Admin') {
-        dispatch(incrementAdminCount());
-      } else {
-        dispatch(incrementEmployeeCount());
-      }
+      formData.post === 'Admin' ? dispatch(incrementAdminCount()) : dispatch(incrementEmployeeCount());
     }
 
-    // Clear selected employee and reset form
+    // Reset
     dispatch(setSelectedEmployee(null));
-    setFormData({
-      name: '',
-      email: '',
-      password: '',
-      salary: 0,
-      address: '',
-      category: '',
-      post: '',
-      image: null,
-    });
-
-    // Navigate back to dashboard or wherever you want
+    setFormData({ name: '', email: '', password: '', salary: '', address: '', category: '', post: '', image: null, preview: null });
     navigate('/');
   };
 
   return (
     <div className="add-employee-container">
-      <div className='backArrow' onClick={() => {
-        navigate(-1)
-        dispatch(setSelectedEmployee(null))
-      }}>⮜</div>
-      <h2>{selectedEmployee ? 'Edit Employee' : 'Add Employee'}</h2>
+      <div className="back-arrow" onClick={() => { navigate(-1); dispatch(setSelectedEmployee(null)); }}>
+        <FiArrowLeft size={24} />
+        <span>Back</span>
+      </div>
+      
+      <div className="form-header">
+        <h2>{selectedEmployee ? 'Edit Employee' : 'Add New Employee'}</h2>
+        <p>{selectedEmployee ? 'Update employee details' : 'Fill in the details to add a new employee'}</p>
+      </div>
+
       <form onSubmit={handleSubmit} className="add-employee-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+        <div className="form-section">
+          <h3>Personal Information</h3>
+          <div className="form-row">
+            <div className="form-group">
+              <FiUser className="input-icon" />
+              <input name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" />
+              {/* <label>Full Name</label> */}
+            </div>
+          </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          disabled={!!selectedEmployee} // Disable email on edit to prevent changing unique key
-        />
+          <div className="form-row">
+            <div className="form-group">
+              <FiMail className="input-icon" />
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required 
+                disabled={!!selectedEmployee} placeholder="Email" />
+              {/* <label>Email Address</label> */}
+            </div>
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+          <div className="form-row">
+            <div className="form-group">
+              <FiLock className="input-icon" />
+              <input type="password" name="password" value={formData.password} onChange={handleChange} required placeholder="Password" />
+              {/* <label>Password</label> */}
+            </div>
+          </div>
+        </div>
 
-        <input
-          type="number"
-          name="salary"
-          placeholder="Salary"
-          value={formData.salary}
-          onChange={handleChange}
-          required
-        />
+        <div className="form-section">
+          <h3>Employment Details</h3>
+          <div className="form-row">
+            <div className="form-group">
+              {/* <FiDollarSign className="input-icon" /> */}
+              <input type="number" name="salary" value={formData.salary} onChange={handleChange} required placeholder="Salary " />
+              {/* <label>Salary</label> */}
+            </div>
+            <div className="form-group">
+              <FiBriefcase className="input-icon" />
+              <select name="post" value={formData.post} onChange={handleChange} required>
+                <option value="" disabled hidden>Select Position</option>
+                {postList.map((p,i) => <option key={i} value={p}>{p}</option>)}
+              </select>
+              {/* <label>Position</label> */}
+            </div>
+          </div>
 
-        <input
-          type="text"
-          name="address"
-          placeholder="Address"
-          value={formData.address}
-          onChange={handleChange}
-          required
-        />
+          <div className="form-row">
+            <div className="form-group">
+              <select name="category" value={formData.category} onChange={handleChange} required>
+                <option value="" disabled hidden>Select Department</option>
+                {categories.map((cat,i) => <option key={i} value={cat}>{cat}</option>)}
+              </select>
+              {/* <label>Department</label> */}
+            </div>
+          </div>
+        </div>
 
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Category</option>
-          {categories?.map((cat, i) => (
-            <option key={i} value={cat}>{cat}</option>
-          ))}
-        </select>
+        <div className="form-section">
+          <h3>Additional Information</h3>
+          <div className="form-row">
+            <div className="form-group">
+              <FiMapPin className="input-icon" />
+              <input name="address" value={formData.address} onChange={handleChange} required placeholder="Address" />
+              {/* <label>Address</label> */}
+            </div>
+          </div>
 
-        <select
-          name="post"
-          value={formData.post}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Post</option>
-          {postList.map((post, i) => (
-            <option key={i} value={post}>{post}</option>
-          ))}
-        </select>
-
-        <label className="file-label">
-          Select Image
-          <input
-            type="file"
-            name="image"
-            onChange={handleChange}
-            accept="image/*"
-          />
-        </label>
+          {/* <div className="form-row">
+            <div className="file-upload-group">
+              <label htmlFor="image-upload" className="file-upload-label">
+                {formData.preview ? (
+                  <div className="image-preview-wrapper">
+                    <img src={formData.preview} alt="preview" className="img-preview" />
+                    <span className="change-image-text">Change Image</span>
+                  </div>
+                ) : (
+                  <>
+                    <FiUpload className="upload-icon" />
+                    <span>Upload Profile Picture</span>
+                  </>
+                )}
+              </label>
+              <input 
+                id="image-upload" 
+                type="file" 
+                name="image" 
+                accept="image/*" 
+                onChange={handleChange} 
+                className="file-input" 
+              />
+            </div>
+          </div> */}
+        </div>
 
         <button type="submit" className="submit-btn">
           {selectedEmployee ? 'Update Employee' : 'Add Employee'}
