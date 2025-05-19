@@ -9,6 +9,15 @@ $border-color: #dee2e6;
 $shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 $transition: all 0.3s ease;
 
+@keyframes shakeX {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+
 .add-category-container {
   max-width: 800px;
   margin: 2rem auto;
@@ -215,7 +224,7 @@ $transition: all 0.3s ease;
 
         &:hover {
           color: $danger-color;
-          transform: rotate(90deg);
+          transform: rotate(360deg);
         }
       }
     }
@@ -268,6 +277,7 @@ $transition: all 0.3s ease;
 
           &:hover {
             background: $primary-dark;
+            animation: shakeX 0.5s ease-in-out;
           }
         }
       }

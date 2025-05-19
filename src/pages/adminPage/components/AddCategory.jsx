@@ -37,7 +37,7 @@ function AddCategory() {
 
   const deleteHandler = (index) => {
     if (window.confirm('Are you sure you want to delete this category?')) {
-      const updatedCategories = categories.filter((_, i) => i !== index);
+      const updatedCategories = categories.filter((cat, i) => i !== index);
       dispatch(setCategories(updatedCategories));
     }
   };
